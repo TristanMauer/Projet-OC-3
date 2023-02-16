@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/login.css">
+	<script type="module" src="login.js"></script>
+</head>
+<header>
+	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+	<nav>
+		<ul>
+			<a href="index.html"><li>projets</li></a>
+			<li>contact</li>
+			<li><a href="login.html" id="login-lien">login</li></a>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+		</ul>
+	</nav>
+</header>
+	<body>
+		<main>
+			<div id="formulaire-login">
+			<h2>Log In</h1>
+			<p id="error-message" class="invisible"> Email ou mot de passe incorrecte </p>
+			
+			<form method="GET" action="#" class="formulaire">
+			<div class="op">			
+				<p>E-mail</p>
+			<input type="text" name="email" id="email" class=" login" >
+			</div>
+			<div class="op">
+				<p>Mot de passe</p>
+			<input type="password" name="motdepasse"  id="password" class=" login">
+			</div>
+			<input type="submit" value="Se connecter" id="btn-login" method="post"> 
+			</form>	
+			<a class="lien-motdepasse">Mot de passe oublié</a>
+			</div>
+		
+		</main>
+	</body>
+
+</body>
+</html>

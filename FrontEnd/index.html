@@ -8,79 +8,121 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/853b596fd4.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
+	<script type="module" src="projets.js"></script>
+	<script type="module" src="modale.js"></script>
+
 </head>
 <body>
 <header>
+	<div class="mode-edition invisible connecter ">
+		<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+		<p>Mode édition </p>
+		<button id="changement">publier les changements</button>
+	</div>
+	<div id="en-tete">
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
+			<a href="index.html"><li>projets</li></a>
 			<li>contact</li>
-			<li>login</li>
+			<a href="login.html" class="lien-login"><li>login</li></a>
+			<a href="index.html " class="logout invisible"><li>logout</li></a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
+</div>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="modale-image-profil invisible connecter ">
+				<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+				<a>modifier</a>
+				</div>
 		</figure>
 		<article>
+			<div class="modale-introduction  invisible connecter ">
+			<i class="fa-sharp fa-solid fa-pen-to-square"></i>
+			<a>modifier</a>
+			</div>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateurtrice)</p>
 		</article>
 	</section>
 	<section id="portfolio">
+
+		<!-- Partie Modale-->
+
+		<div class="flex-modale-projets ">
 		<h2>Mes Projets</h2>
-		<div class="gallery">
-			<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>
+		<div class="modale-projets invisible ">
+			<i class="fa-sharp fa-solid fa-pen-to-square "></i>
+
+			<a href="#modal-delete" class="js-modal-delete">modifier</a>
+			<aside id="modal-delete" class="modal-delete" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-galerie" style="display: none;" >
+				<div class="modal-delete-projets js-modal-stop">
+					<div class="position-icone">
+					<i class="fa-solid fa-xmark js-close-xmark"></i>
+					</div>
+					<h3 id="titre-galerie"> Galerie photo</h3>
+					<div id="galerie-photos">
+					</div>
+					<button id="btn-ajout-photo"><a href="#modal1" class="js-modal-ajout"> Ajouter une photo</a></button>
+					<a id="suprimer-tout">Supprimer la galerie</a>
+				</div>
+			</aside>
+
+		<!-- Partie Modale Ajout Projets-->
+			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-modale" style="display: none;" >
+				<div class="modale-ajout-projets js-modal-stop2">
+					<div class="modale-icone">
+						<i href="#modal-delete" class="fa-solid fa-arrow-left retour-modal-delete"></i>
+						<i class="fa-solid fa-xmark js-close-xmark2"></i>
+					</div>
+					<h3 id="titre-modale"> Ajout photo</h3>
+					<form method="GET" action="#" class="form-projets">
+					<div class="modale-image">
+						<div id="conteneur-image">
+						<i class="fa-regular fa-image"></i>
+						</div>
+						<div id="conteneur-input">
+						<label class="input-ajout-photo">
+							<i class="fa-regular fa-plus"></i>
+							<input type="file" name="input-ajout" id="input-ajout" accept="image/*">
+							Ajouter une photo
+								</label>
+							<p id="texte-taille-image">jpg.png : 4mo max</p>
+						</div>
+					</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="input-title" class="input-projets">
+						<label for="categorie-select">Catégorie</label>
+						<select name="categorie" id="input-categorie" class="input-projets">
+							<option value="objet">Objet</option>
+							<option value="appartements">Appartements</option>
+							<option value="bar&restaurant">Bar & restaurants</option>
+							<option value="hotels">Hôtel</option>
+						</select>
+						<div id="barre-grise"></div>
+						<input type="submit" value="Valider" id="btn-valider" method="post"> 
+					</form>
+				</div>
+			</aside>
+			
+		</div>
+		</div>
+		<div class="flex-filtres">
+		<button class="bouton-filtres btn-tous"> Tous</button>
+		<button class="bouton-filtres btn-objets">Objets</button>
+		<button class="bouton-filtres btn-appartements">Appartements</button>
+		<button class="bouton-filtres btn-hotels">Hôtels & restaurants</button>
+	</div>
+	<div class="gallery">	
 		</div>
 	</section>
 	<section id="contact">
