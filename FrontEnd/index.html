@@ -12,21 +12,21 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="projets.js"></script>
 	<script type="module" src="modale.js"></script>
-
 </head>
 <body>
 <header>
+<!-- Partie connecté -->
 	<div class="mode-edition invisible connecter ">
 		<i class="fa-sharp fa-solid fa-pen-to-square"></i>
 		<p>Mode édition </p>
-		<button id="changement">publier les changements</button>
+		<button id="changement"><a href="index.html"></a>publier les changements</button>
 	</div>
 	<div id="en-tete">
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
 			<a href="index.html"><li>projets</li></a>
-			<li>contact</li>
+			<a href="#contact"><li>contact</li></a>
 			<a href="login.html" class="lien-login"><li>login</li></a>
 			<a href="index.html " class="logout invisible"><li>logout</li></a>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -60,10 +60,11 @@
 
 		<div class="flex-modale-projets ">
 		<h2>Mes Projets</h2>
+		
 		<div class="modale-projets invisible ">
 			<i class="fa-sharp fa-solid fa-pen-to-square "></i>
-
 			<a href="#modal-delete" class="js-modal-delete">modifier</a>
+		<!-- Partie Modale Supression de projets-->
 			<aside id="modal-delete" class="modal-delete" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-galerie" style="display: none;" >
 				<div class="modal-delete-projets js-modal-stop">
 					<div class="position-icone">
@@ -72,20 +73,21 @@
 					<h3 id="titre-galerie"> Galerie photo</h3>
 					<div id="galerie-photos">
 					</div>
-					<button id="btn-ajout-photo"><a href="#modal1" class="js-modal-ajout"> Ajouter une photo</a></button>
+					<button id="btn-ajout-photo"><a href="#modal-ajout" class="js-modal-ajout"> Ajouter une photo</a></button>
 					<a id="suprimer-tout">Supprimer la galerie</a>
 				</div>
 			</aside>
 
 		<!-- Partie Modale Ajout Projets-->
-			<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-modale" style="display: none;" >
+			<aside id="modal-ajout" class="modal-ajout" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-modale" style="display: none;" >
 				<div class="modale-ajout-projets js-modal-stop2">
 					<div class="modale-icone">
 						<i href="#modal-delete" class="fa-solid fa-arrow-left retour-modal-delete"></i>
 						<i class="fa-solid fa-xmark js-close-xmark2"></i>
 					</div>
 					<h3 id="titre-modale"> Ajout photo</h3>
-					<form method="GET" action="#" class="form-projets">
+					<p id="error-message-ajout" class="invisible"> Veuillez remplir tout les champs </p>
+					<form method="GET" action="modale.js" class="form-projets">
 					<div class="modale-image">
 						<div id="conteneur-image">
 						<i class="fa-regular fa-image"></i>
@@ -93,20 +95,19 @@
 						<div id="conteneur-input">
 						<label class="input-ajout-photo">
 							<i class="fa-regular fa-plus"></i>
-							<input type="file" name="input-ajout" id="input-ajout" accept="image/*">
+							<input type="file" name="input-ajout" id="input-ajout" accept="image/*" class="contenu-ajout">
 							Ajouter une photo
 								</label>
 							<p id="texte-taille-image">jpg.png : 4mo max</p>
 						</div>
 					</div>
 						<label for="title">Titre</label>
-						<input type="text" name="title" id="input-title" class="input-projets">
+						<input type="text" name="title" id="input-titre" class="input-projets">
 						<label for="categorie-select">Catégorie</label>
 						<select name="categorie" id="input-categorie" class="input-projets">
-							<option value="objet">Objet</option>
-							<option value="appartements">Appartements</option>
-							<option value="bar&restaurant">Bar & restaurants</option>
-							<option value="hotels">Hôtel</option>
+							<option class="option-value">Objet</option>
+							<option class="option-value">Appartements</option>
+							<option class="option-value">Bar & restaurants</option>
 						</select>
 						<div id="barre-grise"></div>
 						<input type="submit" value="Valider" id="btn-valider" method="post"> 
@@ -116,6 +117,9 @@
 			
 		</div>
 		</div>
+
+		<!-- Partie Bouton Filtres-->
+
 		<div class="flex-filtres">
 		<button class="bouton-filtres btn-tous"> Tous</button>
 		<button class="bouton-filtres btn-objets">Objets</button>
@@ -125,6 +129,9 @@
 	<div class="gallery">	
 		</div>
 	</section>
+
+		<!-- Partie Contact-->
+		
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>

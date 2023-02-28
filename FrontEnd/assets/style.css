@@ -27,6 +27,9 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+*:focus{
+	box-shadow: 0 0 10px blue;
+}
 body {
 	background-color: #FFFEF8;
 	line-height: 1;
@@ -264,7 +267,8 @@ footer nav ul {
 	margin: 0 10px 0 10px;
 }
 
-/* Modale Projet */
+
+/* Modale Delte */
 h3{
 	font-size: 1.5em;
 }
@@ -294,6 +298,11 @@ h3{
 	max-height: calc(100vh - 20px);
 	height: 800px;
 }
+.modal-delete-projets figure{
+	position: relative;
+	width: 85px;
+	height: 128px;
+}
 
 .position-icone {
 	width: 100%;
@@ -302,7 +311,35 @@ h3{
 	font-size: 1.5em;
 	margin: 20px 50px 0 0;
 }
+#btn-ajout-photo a{
+	color: white;
+}
 
+#galerie-photos{
+	display: grid;
+	grid-template-columns:  repeat(5, 85px);
+	grid-column-gap: 20px;
+	border-bottom: solid #B3B3B3 3px;
+}
+#galerie-photos img{
+	width: 100%;
+}
+
+.fa-trash-can{
+	position:absolute;
+	background-color: black;
+	padding: 4px;
+	border: none;
+	border-radius: 5px ;
+	margin-left: 55px;
+	color: white; 
+	margin-top: 6px;
+}
+
+#suprimer-tout{
+	font-size: 1.2em;
+	color: #D65353;
+}
 
 #btn-ajout-photo{
 	font-size: 18px;
@@ -313,39 +350,9 @@ h3{
 	width: 30%;
 	height: 2em;
 }
-#btn-ajout-photo a{
-	color: white;
-}
-.modal-delete-projets figure{
-	position: relative;
-	width: 85px;
-	height: 128px;
-}
-#galerie-photos{
-	display: grid;
-	grid-template-columns:  repeat(5, 85px);
-	grid-column-gap: 20px;
-	border-bottom: solid #B3B3B3 3px;
-}
-#galerie-photos img{
-	width: 100%;
-}
-.fa-trash-can{
-	position:absolute;
-	background-color: black;
-	padding: 4px;
-	border: none;
-	border-radius: 2px ;
-	margin-left: 55px;
-	color: white; 
-	margin-top: 6px;
-}
+/* Modale Projet */
 
-#suprimer-tout{
-	font-size: 1.2em;
-	color: #D65353;
-}
-.modal {
+.modal-ajout {
 	position: fixed;
 	display: flex;
 	justify-content: center;
@@ -354,9 +361,9 @@ h3{
 	left: 0;
 	width: 100%;
 	height: 100%;
-
 	background: rgba(0, 0, 0, 0.5);
 }
+
 .modale-ajout-projets{
 	border-radius: 1em;
 	display: flex;
@@ -366,7 +373,7 @@ h3{
 	width: 800px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
-	height: 750px;
+	height: 800px;
 	padding: 1em;
 }
 .modale-icone{
@@ -392,7 +399,6 @@ h3{
 #input-ajout{
 	display: none;
 }
-
 .modale-image{
 	display: flex;
 	flex-direction: column;
@@ -441,7 +447,6 @@ h3{
 	box-shadow:0 0px 8px 4px rgba(0,0,0,0.05);
 	
 }
-
 #btn-valider{
 	font-size: 18px;
 	background-color: #A7A7A7;
@@ -452,6 +457,17 @@ h3{
 .image-afficher{
 	display: none;
 }
+#error-message-ajout {
+    width: 25%;
+    text-align: center;
+	margin-top: 1em;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    border: 1px solid #8a0000;
+    background-color: #e58f8f;
+  }	
 .invisible{
 	display: none;
 }

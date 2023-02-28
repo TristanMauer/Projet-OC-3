@@ -20,8 +20,14 @@ header{
 		margin-top: 0.5em;	
 	}
 	.op{
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
 		margin: 1em;
 	
+	}
+	.op label{
+		margin: 10px 0 10px 0;
 	}
 #btn-login{
     display: flex;

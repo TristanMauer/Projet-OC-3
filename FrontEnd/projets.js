@@ -1,49 +1,52 @@
 const reponse = await fetch('http://localhost:5678/api/works/');
 const projets =  await reponse.json();
-  
+export { genererProjets, projets, reponse};  
+
 function genererProjets(projets) {
     for (let i = 0; i < projets.length; i++){
         const figure = projets[i];
         const sectionGallery = document.querySelector(".gallery");
         const projetsElement = document.createElement("figure");
         projetsElement.setAttribute("category-id", figure.categoryId);
-        projetsElement.classList.add("categoryId");
-        projetsElement.setAttribute("id", figure.id)
+        projetsElement.setAttribute("figure-id", figure.id)
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
         imageElement.setAttribute("crossorigin", "anonymous");
         const titleElement = document.createElement("figcaption");
         titleElement.innerText = figure.title;        
             
-            sectionGallery.appendChild(projetsElement);
-            projetsElement.appendChild(imageElement);
-            projetsElement.appendChild(titleElement);
+        sectionGallery.appendChild(projetsElement);
+        projetsElement.appendChild(imageElement);
+        projetsElement.appendChild(titleElement);
            
-        }
- }
-    genererProjets(projets);
+    }
+}
 
+genererProjets(projets);
 
-    // gestion des boutons 
-    const boutonTous = document.querySelector(".btn-tous");
-    boutonTous.addEventListener("click", function(){
-       document.querySelectorAll(".categoryId").forEach(
-        figure => figure.classList.remove("invisible"));
+    
+    
+// gestion des boutons 
+const boutonTous = document.querySelector(".btn-tous");
+boutonTous.addEventListener("click", function(){
+    document.querySelectorAll(".categoryId").forEach(
+    figure => figure.classList.remove("invisible"));
         
-    });
+});
+
 // bouton affichage Objets
 const boutonObjets = document.querySelector(".btn-objets");
 boutonObjets.addEventListener("click", function() {
     document.querySelectorAll(".categoryId").forEach(figure => {
     if (figure.getAttribute("category-id") != "1"){
     figure.classList.add("invisible");
-}
+        }
 else{
     figure.classList.remove("invisible");
-        }
-    
-    } );
+        }   
+    });
 });
+
 // bouton affichage Appartements
 const boutonAppartements = document.querySelector(".btn-appartements");
 boutonAppartements.addEventListener("click", function() {
@@ -54,8 +57,9 @@ boutonAppartements.addEventListener("click", function() {
         else{
             figure.classList.remove("invisible");
         }
-    } );
+    });
 });
+
 // bouton affichage Hôtels et restaurants 
 const boutonHotels = document.querySelector(".btn-hotels");
 boutonHotels.addEventListener("click", function(){
@@ -68,7 +72,6 @@ boutonHotels.addEventListener("click", function(){
         
     } );
 });
-
 // Partie connecter 
 if(localStorage.token!= undefined){
     document.querySelector(".mode-edition").classList.remove("invisible");
@@ -84,9 +87,8 @@ if(localStorage.token!= undefined){
 }
 const boutonLogout = document.querySelector(".logout");
 boutonLogout.addEventListener("click", function() {
-    localStorage.clear();
+localStorage.clear();
 })
-
 
 
 
