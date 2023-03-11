@@ -1,14 +1,21 @@
-const reponse = await fetch('http://localhost:5678/api/works/');
-const projets =  await reponse.json();
-export { genererProjets, projets, reponse};  
+// appel à l'API
 
-function genererProjets(projets) {
+const reponse = await fetch('http://localhost:5678/api/works/');
+const projets =  await reponse.json(); 
+
+export { reponse, projets, galleryWorks}
+
+// génération Galerie de manière dynamique 
+
+function galleryWorks(projets) {
     for (let i = 0; i < projets.length; i++){
         const figure = projets[i];
         const sectionGallery = document.querySelector(".gallery");
         const projetsElement = document.createElement("figure");
+        projetsElement.classList.add("categoryId")
         projetsElement.setAttribute("category-id", figure.categoryId);
-        projetsElement.setAttribute("figure-id", figure.id)
+        projetsElement.setAttribute("figure-id", figure.id);
+        projetsElement.setAttribute("id", figure.id);
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
         imageElement.setAttribute("crossorigin", "anonymous");
@@ -22,10 +29,8 @@ function genererProjets(projets) {
     }
 }
 
-genererProjets(projets);
-
-    
-    
+galleryWorks(projets);
+  
 // gestion des boutons 
 const boutonTous = document.querySelector(".btn-tous");
 boutonTous.addEventListener("click", function(){

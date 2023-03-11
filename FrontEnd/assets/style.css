@@ -27,9 +27,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-*:focus{
-	box-shadow: 0 0 10px blue;
-}
+
 body {
 	background-color: #FFFEF8;
 	line-height: 1;
@@ -268,7 +266,7 @@ footer nav ul {
 }
 
 
-/* Modale Delte */
+/* Modale Delete */
 h3{
 	font-size: 1.5em;
 }
@@ -296,7 +294,7 @@ h3{
 	width: 800px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
-	height: 800px;
+	padding-bottom: 50px;
 }
 .modal-delete-projets figure{
 	position: relative;
@@ -315,13 +313,13 @@ h3{
 	color: white;
 }
 
-#galerie-photos{
+#galery-modale{
 	display: grid;
 	grid-template-columns:  repeat(5, 85px);
 	grid-column-gap: 20px;
 	border-bottom: solid #B3B3B3 3px;
 }
-#galerie-photos img{
+#galery-modale img{
 	width: 100%;
 }
 
@@ -350,7 +348,7 @@ h3{
 	width: 30%;
 	height: 2em;
 }
-/* Modale Projet */
+/* Modale Ajout Projet */
 
 .modal-ajout {
 	position: fixed;
@@ -373,7 +371,6 @@ h3{
 	width: 800px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
-	height: 800px;
 	padding: 1em;
 }
 .modale-icone{
@@ -382,24 +379,30 @@ h3{
 	display: flex;
 	justify-content: space-between;
 }
-#conteneur-image{
-	display: flex;
+#image-afficher{
+	display: none;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 100%;
 }
-.modale-image img{
+.conteneur-ajout-image img{
 	height: 100%;
 }
 .fa-image{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 8em;
 	color: #B9C5CC;
 }
 #input-ajout{
 	display: none;
 }
-.modale-image{
+#input-test{
+	display: none;
+}
+.conteneur-ajout-image{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -458,6 +461,17 @@ h3{
 	display: none;
 }
 #error-message-ajout {
+    width: 25%;
+    text-align: center;
+	margin-top: 1em;
+    padding: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    border: 1px solid #8a0000;
+    background-color: #e58f8f;
+  }	
+  #error-message-taille {
     width: 25%;
     text-align: center;
 	margin-top: 1em;

@@ -1,18 +1,22 @@
-import { genererProjets, projets, reponse } from "./projets.js";
+// importation de fonction 
+import {reponse, projets, galleryWorks} from "./projets.js";
+
 // génération Galerie modale delete
-function genererGalerieDelete(projets) {
+function deleteGallery(projets) {
     for (let i = 0; i < projets.length; i++){
+        
         const figure = projets[i];
-        const sectionGallery = document.querySelector("#galerie-photos");
+        const sectionGallery = document.querySelector("#galery-modale");
         const projetsElement = document.createElement("figure");
         projetsElement.setAttribute("category-id", figure.categoryId);
+        projetsElement.dataset.id = figure.id;
         projetsElement.setAttribute("figure-id", figure.id)
         const imageElement = document.createElement("img");
         imageElement.src = figure.imageUrl;
         imageElement.setAttribute("crossorigin", "anonymous");
         const iconeDelete = document.createElement("i");
         iconeDelete.setAttribute("figure-id", figure.id)
-        iconeDelete.setAttribute("id", figure.id)
+        iconeDelete.dataset.id = figure.id;
         iconeDelete.classList.add("fa-solid", "fa-trash-can");
         const titleElement = document.createElement("a");
         titleElement.innerText = "éditer";   
@@ -20,13 +24,16 @@ function genererGalerieDelete(projets) {
         projetsElement.appendChild(imageElement);
         projetsElement.appendChild(titleElement);
         sectionGallery.appendChild(projetsElement);
+        iconeDelete.addEventListener('click', function(){
+            deleteWork(figure.id)
+        })
     }
 }
-genererGalerieDelete(projets);
+deleteGallery(projets);
 
-// Partie Modale
-let modal = null
 // Ouverture de la modale delete
+let modal = null
+
 const openModalDelete = function (e) {
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute('href'))
@@ -51,13 +58,17 @@ const closeModalDelete =  function(e){
     modal.querySelector('.js-modal-ajout').removeEventListener('click', closeModalDelete) 
     modal = null
 }
+// Déclaration de la constante permettant de stopper la propagation de certain éléments
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
-document.querySelectorAll(".js-modal-delete").forEach(a => {
-    a.addEventListener('click', openModalDelete)
-})
-    
+
+// Selection de la classe "js-modal-delete" + écoute de l'évènement click pemettant d'ouvrir la modale
+
+document.querySelector(".js-modal-delete").addEventListener('click', openModalDelete)
+
+// Ajout de l'évènement permettant de fermer les modales en appuyant sur la touche escape 
+
 window.addEventListener('keydown', function(e){
     if(e.key === "Escape" || e.key === "Esc"){
         closeModalDelete(e)
@@ -66,67 +77,84 @@ window.addEventListener('keydown', function(e){
         closeModaleProjets(e)
     }  
 })
-// Suppression des travaux 
 
-const iconeDeletes = document.querySelectorAll(".fa-trash-can");
-iconeDeletes.forEach(iconeDelete => iconeDelete.addEventListener('click', function(e){
-    deleteWork(e) 
-}))
 
-function deleteFromDom(figureId){
-    document.querySelectorAll("figure").forEach(figure => 
-        {if(figure.getAttribute("figure-id") == figureId){
+// Function qui supprime les projets direcement dans le DOM 
+function deleteWorkFromDom(projetsId){
+    document.querySelectorAll("figure[figure-id").forEach(figure => 
+        {if(figure.getAttribute("figure-id") == projetsId){
             figure.remove()
         }
     })   
 }
-function deleteWork(e) { 
-    console.log(e)
-    const figureId =  e.target.id;
-    fetch(`http://localhost:5678/api/works/${figureId}`, {
+
+// function DeleteWork qui permet de supprimer un projets lors du clique sur l'icone trash
+
+function deleteWork(projetsId) {  
+    fetch(`http://localhost:5678/api/works/` + projetsId, {
         method: 'DELETE',
         headers: {
             "Content-type": "application/json",
             "Authorization": `Bearer ${localStorage.token}`
-        }
-        /* savoir si la reoonse du backend est correcte*/   
+        }  
     })
-    .then(res => deleteFromDom(figureId))
+    .then(reponse => deleteWorkFromDom(projetsId))
     .catch(error => console.log(error)) 
 }
+// fonction deleteAllWork qui par une boucle for appelle la fonction deleteWork pour chaque projets existant
+
+function deleteAllWork(){ 
+    const projets = document.querySelectorAll("figure[figure-id]")
+    for (let h = 0; h < projets.length; h++){
+        const figure = projets[h]
+        const projetsId = figure.dataset.id;
+        deleteWork(projetsId);
+    
+    }  
+}
+
+// Selectionne le lien et appelle la function deleteAllWork lors d'un click sur le lien
+
+const BtnDeleteAll = document.querySelector("#suprimer-tout");
+BtnDeleteAll.addEventListener('click', function(e){
+    e.preventDefault();
+    deleteAllWork();
+})
+
 // Ouverture de la modale ajout projets
 
-let modalAjout = null
+let modalAdd = null
 
 const openModalProjets = function(e){
     e.preventDefault() 
-    modalAjout = document.querySelector(e.target.getAttribute('href'))
-    modalAjout.style.display = null 
-    modalAjout.removeAttribute('aria-hidden')
-    modalAjout.setAttribute('aria-modal', 'true') 
-    modalAjout.addEventListener('click', closeModaleProjets) 
-    modalAjout.querySelector('.js-close-xmark2').addEventListener('click', closeModaleProjets)
-    modalAjout.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
-    modalAjout.querySelector('.retour-modal-delete').addEventListener('click', closeModaleProjets)
+    modalAdd = document.querySelector(e.target.getAttribute('href'))
+    modalAdd.style.display = null 
+    modalAdd.removeAttribute('aria-hidden')
+    modalAdd.setAttribute('aria-modal', 'true') 
+    modalAdd.addEventListener('click', closeModaleProjets) 
+    modalAdd.querySelector('.js-close-xmark2').addEventListener('click', closeModaleProjets)
+    modalAdd.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
+    modalAdd.querySelector('.retour-modal-delete').addEventListener('click', closeModaleProjets)
 }
 // Fermeture de la modale ajout de projets
 const closeModaleProjets = function(e) {
-    if(modalAjout === null) return
+    if(modalAdd === null) return
     e.preventDefault()
-    modalAjout.style.display = "none" 
-    modalAjout.setAttribute('aria-hidden', 'true')
-    modalAjout.removeAttribute('aria-modal')
-    modalAjout.removeEventListener('click', closeModaleProjets)
-    modalAjout.querySelector('.js-close-xmark2').removeEventListener('click', closeModaleProjets)
-    modalAjout.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation)
-    modalAjout.querySelector('.retour-modal-delete').removeEventListener('click', closeModaleProjets)
-    modalAjout.querySelector("#error-message-ajout").classList.add("invisible")
-    inputTitre.value = "";
-    imageAfficher.src = "";
-    imageDefaut.style.display = "block";
-     textTailleMax.style.display = "block";
-     modalAjout = null
+    modalAdd.style.display = "none" 
+    modalAdd.setAttribute('aria-hidden', 'true')
+    modalAdd.removeAttribute('aria-modal')
+    modalAdd.removeEventListener('click', closeModaleProjets)
+    modalAdd.querySelector('.js-close-xmark2').removeEventListener('click', closeModaleProjets)
+    modalAdd.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation)
+    modalAdd.querySelector('.retour-modal-delete').removeEventListener('click', closeModaleProjets)
+    modalAdd.querySelector("#error-message-ajout").classList.add("invisible")
+    inputTitle.value = "";
+    imagePreview.src = "";
+    imageDefault.style.display = "block";
+    conteneurPreview.style.display = "none"
+    modalAdd = null
 }
+
 document.querySelectorAll(".js-modal-ajout").forEach(a => {
     a.addEventListener('click', openModalProjets)
     })
@@ -134,40 +162,44 @@ document.querySelectorAll('.retour-modal-delete').forEach(a => {
     a.addEventListener('click', openModalDelete)    
 })
 
-// Ajout d'un projet
-const conteneurPreview = document.getElementById('conteneur-image');
-const textTailleMax = document.getElementById('conteneur-input');
-const inputImage = document.getElementById('input-ajout');
-const imageDefaut = document.querySelector(".fa-image");
-const imageAfficher = document.createElement('img');
-    imageAfficher.className = "image-preview";
-const inputTitre = document.getElementById("input-titre");
-    inputTitre.addEventListener('click', function(e){
-    const messageErreur = document.getElementById("error-message-ajout");
-    messageErreur.classList.add('invisible')
-})
+// selection des différents éléments utile dans la modale Ajout de projet
+const conteneurPreview = document.getElementById('image-afficher');
+const inputImage = document.querySelector("#input-ajout");
+    inputImage.value = "" ;
+const imageDefault = document.querySelector("#conteneur-defaut");
+const imagePreview = document.createElement('img');
+imagePreview.className = "image-preview";
+const inputTitle = document.getElementById("input-titre");
+    inputTitle.addEventListener('click', function(e){
+    const errorMessage = document.getElementById("error-message-ajout");
+    errorMessage.classList.add('invisible')
+    const errorMessageSize = document.getElementById("error-message-taille");
+    errorMessageSize.classList.add('invisible')
+    })
 
 // Affichage de l'image choisi
-inputImage.addEventListener('change', () => {
-    const file = inputImage.files[0];
-    const affichage = new FileReader();
-    affichage.onload = (e) => {
-        imageAfficher.src = e.target.result;
-        imageDefaut.style.display = "none";
-        textTailleMax.style.display = "none";
-        conteneurPreview.appendChild(imageAfficher)
-    };
-    affichage.readAsDataURL(file);
-});
+
+inputImage.addEventListener("change", function(){
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+        imagePreview.src = reader.result;
+        imageDefault.style.display = "none";
+        conteneurPreview.style.display = "flex"
+        conteneurPreview.appendChild(imagePreview)
+    })
+    reader.readAsDataURL(this.files[0])
+})
 
 // écoute du formulaire 
+
 document.querySelector(".form-projets").addEventListener("submit", function(event){
    event.preventDefault();
 })
 
+
 // ajout des id des catégories
 const categorySelect = document.getElementById('input-categorie');
- function getCategories() {
+ function getCategory() {
     fetch(`http://localhost:5678/api/categories`).then(res => res.json()).then(data => {
         data.forEach(category => {
             let option = document.querySelector(".option-value")
@@ -177,46 +209,104 @@ const categorySelect = document.getElementById('input-categorie');
     })
     .catch(err => console.log(err))
 }
-
-getCategories()
+getCategory()
 
 // écoute de l'évènement de click bouton Valider
-const btnAjoutProjets = document.querySelector('#btn-valider');
+const btnAddWork = document.querySelector('#btn-valider');
 
-btnAjoutProjets.addEventListener('click', (e) => {
-    e.preventDefault()
-    getInputsValue()
-})
-function getInputsValue() {
-    let imageValue = inputImage.files[0];
-    let titreValue = inputTitre.value;
-    let categoryId = categorySelect.selectedOptions[0].id
-
-    if (!imageValue || !titreValue || !categoryId) {
-       document.querySelector("#error-message-ajout").classList.remove("invisible");
-       imageDefaut.style.display = "block";
-       textTailleMax.style.display = "block";
-        imageAfficher.src = "";
-        inputTitre.value = "";
-    } else {
-        addWork(imageValue, titreValue, categoryId)
-        imageDefaut.style.display = "block";
-        textTailleMax.style.display = "block";
-        imageAfficher.src = "";
-        inputTitre.value = "";
+// écoute du clique du bouton et condition à l'envoie du formulaire
+btnAddWork.addEventListener('click', async (e) => {
+    // condition taille image
+    if(inputImage.files.length > 4194304){
+        document.querySelector("#error-message-taille").classList.remove("invisible");
+        imageDefault.style.display = "block";
+        conteneurPreview.style.display = "none"
+        imagePreview.src = "";
+        inputTitle.value = "";
+    } 
+    // condition sur l'ajout du projets
+    if( inputImage.files.length > 0 && inputTitle.value.length > 0  && categorySelect.value.length > 0 ){
+        addWork()
+        imageDefault.style.display = "block";
+        conteneurPreview.style.display = "none"
+        imagePreview.src = "";
+        inputImage.value="";
+        inputTitle.value = "";
     }
-}
-function addWork(file, title, category) {
-    let formData = new FormData();
-    formData.append("image", file)
-    formData.append("title", title)
-    formData.append("category", category)
-    fetch(`http://localhost:5678/api/works`, {
+    // gestion du cas où le formulaire n'est pas rempli correctement 
+    else {
+        document.querySelector("#error-message-ajout").classList.remove("invisible");
+        imageDefault.style.display = "block";
+        conteneurPreview.style.display = "none"
+        inputImage.value="";
+        imagePreview.src = "";
+        inputTitle.value = "";
+    }
+    e.preventDefault()
+});
+
+// Fonction addWork permettant l'envoie du projets dans l'api 
+
+async function addWork(figureId) {
+    let formData = new  FormData();
+    formData.append("image", inputImage.files[0])
+    formData.append("title", inputTitle.value)
+    formData.append("category", categorySelect.selectedOptions[0].id)
+    formData.append("id", figureId)
+    const response = await fetch(`http://localhost:5678/api/works`, {
         method: "POST",
         body: formData,
         headers: {
             "Authorization": `Bearer ${localStorage.token}`
-        }
-})
-.catch(err => console.log(err))
+        }   
+    })
+    .then((res) => res.json())
+    .then((data) => {  
+        addWorkGallery(data.title, data.imageUrl, data.id, data.categoryId);
+        addWorkModale( data.imageUrl, data.id, data.categoryId);
+    })
+}
+// function qui créer le projets  ajouter
+function addWorkGallery (title, img, id, categoryId){
+
+    const sectionGallery = document.querySelector(".gallery");
+        const projetsElement = document.createElement("figure");
+        projetsElement.classList.add("categoryId")
+        projetsElement.setAttribute("category-id", categoryId);
+        projetsElement.setAttribute("figure-id", id);
+        projetsElement.setAttribute("id",id);
+        const imageElement = document.createElement("img");
+        imageElement.src = img;
+        imageElement.setAttribute("crossorigin", "anonymous");
+        const titleElement = document.createElement("figcaption");
+        titleElement.innerText = title;        
+            
+        sectionGallery.appendChild(projetsElement);
+        projetsElement.appendChild(imageElement);
+        projetsElement.appendChild(titleElement);
+}
+
+function addWorkModale ( img, id, categoryId){
+
+    const sectionGallery = document.querySelector("#galery-modale");
+    const projetsElement = document.createElement("figure");
+    projetsElement.setAttribute("category-id",categoryId);
+    projetsElement.dataset.id = id;
+    projetsElement.setAttribute("figure-id", id)
+    const imageElement = document.createElement("img");
+    imageElement.src = img;
+    imageElement.setAttribute("crossorigin", "anonymous");
+    const iconeDelete = document.createElement("i");
+    iconeDelete.setAttribute("figure-id", id)
+    iconeDelete.dataset.id = id;
+    iconeDelete.classList.add("fa-solid", "fa-trash-can");
+    const titleElement = document.createElement("a");
+    titleElement.innerText = "éditer"; 
+    iconeDelete.addEventListener('click', function(){
+        deleteWork(id)
+    })
+    projetsElement.appendChild(iconeDelete); 
+    projetsElement.appendChild(imageElement);
+    projetsElement.appendChild(titleElement);
+    sectionGallery.appendChild(projetsElement);
 }

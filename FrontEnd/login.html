@@ -25,8 +25,9 @@
 		<main>
 			<div id="formulaire-login">
 			<h2>Log In</h1>
-			<p id="error-message" class="invisible"> Email ou mot de passe incorrecte </p>
-			<form method="GET" action="login.js" class="formulaire">
+			<p id="error-message" class="error invisible"> Email ou mot de passe incorrecte </p>
+			<p id="error-message-champs" class="error invisible"> Veuillez remplir tous les champs </p>
+			<form method="POST" action="login.js" class="formulaire">
 			<div class="op">			
 				<label for="email">Email</label>
 			<input type="text" name="email" id="email" class=" login" >			

@@ -40,7 +40,7 @@ header{
 .lien-motdepasse{
 	text-decoration: underline;
 }
-#error-message {
+.error {
     width: 25%;
     text-align: center;
 	margin-top: 1em;

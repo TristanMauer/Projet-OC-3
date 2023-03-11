@@ -71,7 +71,7 @@
 					<i class="fa-solid fa-xmark js-close-xmark"></i>
 					</div>
 					<h3 id="titre-galerie"> Galerie photo</h3>
-					<div id="galerie-photos">
+					<div id="galery-modale">
 					</div>
 					<button id="btn-ajout-photo"><a href="#modal-ajout" class="js-modal-ajout"> Ajouter une photo</a></button>
 					<a id="suprimer-tout">Supprimer la galerie</a>
@@ -86,25 +86,31 @@
 						<i class="fa-solid fa-xmark js-close-xmark2"></i>
 					</div>
 					<h3 id="titre-modale"> Ajout photo</h3>
-					<p id="error-message-ajout" class="invisible"> Veuillez remplir tout les champs </p>
-					<form method="GET" action="modale.js" class="form-projets">
-					<div class="modale-image">
-						<div id="conteneur-image">
-						<i class="fa-regular fa-image"></i>
+					<p id="error-message-ajout" class="invisible"> Veuillez remplir tous les champs </p>
+					<p id="error-message-taille" class="invisible"> Veuillez choisir un fichier de moins de 4mo </p>
+					<form method="POST" action="modale.js" class="form-projets" action="modale.js">
+					<div class="conteneur-ajout-image">
+						<div id="image-afficher">
 						</div>
-						<div id="conteneur-input">
-						<label class="input-ajout-photo">
-							<i class="fa-regular fa-plus"></i>
-							<input type="file" name="input-ajout" id="input-ajout" accept="image/*" class="contenu-ajout">
-							Ajouter une photo
+							<div id="conteneur-defaut">
+							<i class="fa-regular fa-image"></i>
+								<div id="conteneur-input">
+								<label class="input-ajout-photo">
+								<i class="fa-regular fa-plus"></i>
+								<input type="file" name="input-ajout" id="input-ajout" accept="image/png , image/jpg" class="contenu-ajout" required>
+								<input type="file" name="input-ajout" id="input-test" accept="image/png , image/jpg" class="contenu-ajout" required>
+								Ajouter une photo
 								</label>
+								
 							<p id="texte-taille-image">jpg.png : 4mo max</p>
-						</div>
+								</div>
+							</div>
 					</div>
 						<label for="title">Titre</label>
-						<input type="text" name="title" id="input-titre" class="input-projets">
+						<input type="text" name="title" id="input-titre" class="input-projets" required>
 						<label for="categorie-select">Catégorie</label>
 						<select name="categorie" id="input-categorie" class="input-projets">
+							<option value=""></option>
 							<option class="option-value">Objet</option>
 							<option class="option-value">Appartements</option>
 							<option class="option-value">Bar & restaurants</option>
