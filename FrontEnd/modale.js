@@ -232,13 +232,13 @@ btnAddWork.addEventListener('click', async (e) => {
 
 // Fonction addWork permettant l'envoie du projets dans l'api 
 
-async function addWork(figureId) {
+function addWork(figureId) {
     let formData = new  FormData();
     formData.append("image", inputImage.files[0])
     formData.append("title", inputTitle.value)
     formData.append("category", categorySelect.selectedOptions[0].id)
     formData.append("id", figureId)
-    const response = await fetch(`http://localhost:5678/api/works`, {
+    fetch(`http://localhost:5678/api/works`, {
         method: "POST",
         body: formData,
         headers: {
