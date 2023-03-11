@@ -22,7 +22,7 @@ password.addEventListener('click', function(e){
 document.querySelector('#btn-login').addEventListener('click', function() {;
     // condition qui lance la fonction fetch si les deux valeur sont remplis
     if(email.value.trim() !== '' && password.value.trim() !== ''){
-    const reponseLogin = fetch('http://localhost:5678/api/users/login', {
+    fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

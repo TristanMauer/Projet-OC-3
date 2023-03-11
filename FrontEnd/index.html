@@ -19,16 +19,16 @@
 	<div class="mode-edition invisible connecter ">
 		<i class="fa-sharp fa-solid fa-pen-to-square"></i>
 		<p>Mode édition </p>
-		<button id="changement"><a href="index.html"></a>publier les changements</button>
+		<button id="changement">publier les changements</button>
 	</div>
 	<div id="en-tete">
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<a href="index.html"><li>projets</li></a>
-			<a href="#contact"><li>contact</li></a>
-			<a href="login.html" class="lien-login"><li>login</li></a>
-			<a href="index.html " class="logout invisible"><li>logout</li></a>
+			<li><a href="index.html">projets</a></li>
+			<li><a href="#contact">contact</a></li>
+			<li><a href="login.html" class="lien-login">login</a></li>
+			<li><a href="index.html " class="logout invisible">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -65,7 +65,7 @@
 			<i class="fa-sharp fa-solid fa-pen-to-square "></i>
 			<a href="#modal-delete" class="js-modal-delete">modifier</a>
 		<!-- Partie Modale Supression de projets-->
-			<aside id="modal-delete" class="modal-delete" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-galerie" style="display: none;" >
+			<aside id="modal-delete" class="modal-delete invisible"   aria-labelledby="titre-galerie"  >
 				<div class="modal-delete-projets js-modal-stop">
 					<div class="position-icone">
 					<i class="fa-solid fa-xmark js-close-xmark"></i>
@@ -73,22 +73,22 @@
 					<h3 id="titre-galerie"> Galerie photo</h3>
 					<div id="galery-modale">
 					</div>
-					<button id="btn-ajout-photo"><a href="#modal-ajout" class="js-modal-ajout"> Ajouter une photo</a></button>
+					<button id="btn-ajout-photo" class="js-modal-ajout">Ajouter une photo</button>
 					<a id="suprimer-tout">Supprimer la galerie</a>
 				</div>
 			</aside>
 
 		<!-- Partie Modale Ajout Projets-->
-			<aside id="modal-ajout" class="modal-ajout" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="#titre-modale" style="display: none;" >
+			<aside id="modal-ajout" class="modal-ajout invisible"  aria-labelledby="titre-modale" >
 				<div class="modale-ajout-projets js-modal-stop2">
 					<div class="modale-icone">
-						<i href="#modal-delete" class="fa-solid fa-arrow-left retour-modal-delete"></i>
+						<i class="fa-solid fa-arrow-left retour-modal-delete"></i>
 						<i class="fa-solid fa-xmark js-close-xmark2"></i>
 					</div>
 					<h3 id="titre-modale"> Ajout photo</h3>
 					<p id="error-message-ajout" class="invisible"> Veuillez remplir tous les champs </p>
 					<p id="error-message-taille" class="invisible"> Veuillez choisir un fichier de moins de 4mo </p>
-					<form method="POST" action="modale.js" class="form-projets" action="modale.js">
+					<form method="POST" action="modale.js" class="form-projets">
 					<div class="conteneur-ajout-image">
 						<div id="image-afficher">
 						</div>
@@ -98,7 +98,6 @@
 								<label class="input-ajout-photo">
 								<i class="fa-regular fa-plus"></i>
 								<input type="file" name="input-ajout" id="input-ajout" accept="image/png , image/jpg" class="contenu-ajout" required>
-								<input type="file" name="input-ajout" id="input-test" accept="image/png , image/jpg" class="contenu-ajout" required>
 								Ajouter une photo
 								</label>
 								
@@ -106,17 +105,17 @@
 								</div>
 							</div>
 					</div>
-						<label for="title">Titre</label>
+						<label id="title">Titre</label>
 						<input type="text" name="title" id="input-titre" class="input-projets" required>
-						<label for="categorie-select">Catégorie</label>
+						<label id="categorie-select">Catégorie</label>
 						<select name="categorie" id="input-categorie" class="input-projets">
-							<option value=""></option>
+							<option>   </option>
 							<option class="option-value">Objet</option>
 							<option class="option-value">Appartements</option>
 							<option class="option-value">Bar & restaurants</option>
 						</select>
 						<div id="barre-grise"></div>
-						<input type="submit" value="Valider" id="btn-valider" method="post"> 
+						<input type="submit" value="Valider" id="btn-valider"> 
 					</form>
 				</div>
 			</aside>

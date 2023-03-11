@@ -19,14 +19,14 @@ header{
 		height: 3em;
 		margin-top: 0.5em;	
 	}
-	.op{
+	.input-login{
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
 		margin: 1em;
 	
 	}
-	.op label{
+	.input-login label{
 		margin: 10px 0 10px 0;
 	}
 #btn-login{

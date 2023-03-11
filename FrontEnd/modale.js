@@ -32,31 +32,23 @@ function deleteGallery(projets) {
 deleteGallery(projets);
 
 // Ouverture de la modale delete
-let modal = null
+let modalDelete = document.querySelector("#modal-delete")
 
 const openModalDelete = function (e) {
     e.preventDefault()
-    modal = document.querySelector(e.target.getAttribute('href'))
-    modal.style.display = null 
-    modal.removeAttribute('aria-hidden')
-    modal.setAttribute('aria-modal', 'true')
-    modal.addEventListener('click', closeModalDelete) 
-    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-    modal.querySelector('.js-close-xmark').addEventListener('click', closeModalDelete)
-    modal.querySelector('.js-modal-ajout').addEventListener('click', closeModalDelete)
+    modalDelete.classList.remove("invisible")
+    modalDelete.addEventListener('click', closeModalDelete) 
+    modalDelete.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
+    modalDelete.querySelector('.js-close-xmark').addEventListener('click', closeModalDelete)
+    modalDelete.querySelector('.js-modal-ajout').addEventListener('click', closeModalDelete)
 }
 // Fermeture de la modela Delete
 const closeModalDelete =  function(e){
-    if(modal === null) return
-    e.preventDefault()
-    modal.style.display = "none" 
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('aria-modal')
-    modal.removeEventListener('click', closeModalDelete) 
-    modal.querySelector('.js-close-xmark').removeEventListener('click', closeModalDelete)
-    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation) 
-    modal.querySelector('.js-modal-ajout').removeEventListener('click', closeModalDelete) 
-    modal = null
+    modalDelete.classList.add("invisible")
+    modalDelete.removeEventListener('click', closeModalDelete) 
+    modalDelete.querySelector('.js-close-xmark').removeEventListener('click', closeModalDelete)
+    modalDelete.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation) 
+    modalDelete.querySelector('.js-modal-ajout').removeEventListener('click', closeModalDelete) 
 }
 // Déclaration de la constante permettant de stopper la propagation de certain éléments
 const stopPropagation = function (e) {
@@ -123,14 +115,11 @@ BtnDeleteAll.addEventListener('click', function(e){
 
 // Ouverture de la modale ajout projets
 
-let modalAdd = null
-
+ 
+const modalAdd = document.querySelector("#modal-ajout")
 const openModalProjets = function(e){
     e.preventDefault() 
-    modalAdd = document.querySelector(e.target.getAttribute('href'))
-    modalAdd.style.display = null 
-    modalAdd.removeAttribute('aria-hidden')
-    modalAdd.setAttribute('aria-modal', 'true') 
+    modalAdd.classList.remove("invisible")
     modalAdd.addEventListener('click', closeModaleProjets) 
     modalAdd.querySelector('.js-close-xmark2').addEventListener('click', closeModaleProjets)
     modalAdd.querySelector('.js-modal-stop2').addEventListener('click', stopPropagation)
@@ -138,11 +127,8 @@ const openModalProjets = function(e){
 }
 // Fermeture de la modale ajout de projets
 const closeModaleProjets = function(e) {
-    if(modalAdd === null) return
     e.preventDefault()
-    modalAdd.style.display = "none" 
-    modalAdd.setAttribute('aria-hidden', 'true')
-    modalAdd.removeAttribute('aria-modal')
+    modalAdd.classList.add("invisible")
     modalAdd.removeEventListener('click', closeModaleProjets)
     modalAdd.querySelector('.js-close-xmark2').removeEventListener('click', closeModaleProjets)
     modalAdd.querySelector('.js-modal-stop2').removeEventListener('click', stopPropagation)
@@ -152,7 +138,6 @@ const closeModaleProjets = function(e) {
     imagePreview.src = "";
     imageDefault.style.display = "block";
     conteneurPreview.style.display = "none"
-    modalAdd = null
 }
 
 document.querySelectorAll(".js-modal-ajout").forEach(a => {

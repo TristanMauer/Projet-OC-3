@@ -309,9 +309,6 @@ h3{
 	font-size: 1.5em;
 	margin: 20px 50px 0 0;
 }
-#btn-ajout-photo a{
-	color: white;
-}
 
 #galery-modale{
 	display: grid;
@@ -341,6 +338,7 @@ h3{
 
 #btn-ajout-photo{
 	font-size: 18px;
+	color: white;
 	background-color: #1D6154;
 	margin: 2em;
 	border-radius: 30px;

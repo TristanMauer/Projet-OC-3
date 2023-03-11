@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,38 +10,36 @@
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/login.css">
 	<script type="module" src="login.js"></script>
+	<title>page de connexion</title>
 </head>
-<header>
+
+<body>
+	<header>
 	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 	<nav>
 		<ul>
-			<a href="index.html"><li>projets</li></a>
+			<li><a href="index.html">projets</a></li>
 			<li>contact</li>
-			<li><a href="login.html" id="login-lien">login</li></a>
+			<li><a href="login.html" id="login-lien">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
-</header>
-	<body>
-		<main>
-			<div id="formulaire-login">
-			<h2>Log In</h1>
+	</header>
+		<div id="formulaire-login">
+			<h2>Log In</h2>
 			<p id="error-message" class="error invisible"> Email ou mot de passe incorrecte </p>
 			<p id="error-message-champs" class="error invisible"> Veuillez remplir tous les champs </p>
 			<form method="POST" action="login.js" class="formulaire">
-			<div class="op">			
-				<label for="email">Email</label>
-			<input type="text" name="email" id="email" class=" login" >			
-				<label for="password">Mot de passe</label>
-			<input type="password" name="motdepasse"  id="password" class=" login">
-			</div>
-			<input type="submit" value="Se connecter" id="btn-login" method="post"> 
+				<div class="input-login">			
+					<label for="email">Email</label>
+					<input type="text" name="email" id="email" class=" login" >			
+					<label for="password">Mot de passe</label>
+					<input type="password" name="motdepasse"  id="password" class=" login">
+				</div>
+			<input type="submit" value="Se connecter" id="btn-login"> 
 			</form>	
 			<a class="lien-motdepasse">Mot de passe oublié</a>
-			</div>
+		</div>
 		
-		</main>
-	</body>
-
 </body>
 </html>
